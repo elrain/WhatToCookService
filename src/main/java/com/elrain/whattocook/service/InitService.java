@@ -21,6 +21,7 @@ public class InitService {
     public InitData initData() {
         try {
             List<NamedEntity> groups = new GroupHelper().get();
+
             List<NamedEntity> kitchenTypes = new KitchenTypeHelper().get();
             List<NamedEntity> dishTypes = new DishTypeHelper().get();
             List<NamedEntity> amountTypes = new AmountTypeHelper().get();
