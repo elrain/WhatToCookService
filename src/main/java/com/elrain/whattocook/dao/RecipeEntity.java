@@ -10,14 +10,16 @@ public class RecipeEntity {
     private int cookTime;
     private long idKitchenType;
     private long idDishType;
+    private String image;
 
-    public RecipeEntity(long id, String name, String description, int cookTime, long idKitchenType, long idDishType) {
+    public RecipeEntity(long id, String name, String description, int cookTime, long idKitchenType, long idDishType, String image) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.cookTime = cookTime;
         this.idKitchenType = idKitchenType;
         this.idDishType = idDishType;
+        this.image = image;
     }
 
     public long getId() {
@@ -42,5 +44,9 @@ public class RecipeEntity {
 
     public long getIdDishType() {
         return idDishType;
+    }
+
+    public String getImage() {
+        return image;
     }
 }
