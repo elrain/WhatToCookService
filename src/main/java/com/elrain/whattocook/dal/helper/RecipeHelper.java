@@ -33,7 +33,7 @@ public class RecipeHelper extends Accessor {
         try {
             Statement st = this.connection.createStatement();
             ResultSet resultSet = st.executeQuery("SELECT " + ID + ", " + NAME + ", " + ID_KITCHEN_TYPE + "" +
-                    ", " + ID_DISH_TYPE + ", " + DESCRIPTION + ", "+COOK_TIME+", "+IMAGE+" FROM " + TABLE + ";");
+                    ", " + ID_DISH_TYPE + ", " + DESCRIPTION + ", "+COOK_TIME+", "+IMAGE+" FROM " + TABLE + " LIMIT 50;");
             while (resultSet.next()) {
 
                 RecipeEntity entity = new RecipeEntity(resultSet.getLong(ID), resultSet.getString(NAME),
