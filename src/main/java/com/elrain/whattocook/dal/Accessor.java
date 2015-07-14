@@ -16,7 +16,7 @@ public class Accessor {
 
     public Accessor() throws Exception {
         this.getClass().forName("com.mysql.jdbc.Driver");
-        String url = "jdbc:mysql://localhost:3306/whattocook";
+        String url = "jdbc:mysql://localhost:3306/whattocook?useUnicode=true&characterEncoding=utf8";
         String user = "whattocook1";
         String password = "police1";
 
