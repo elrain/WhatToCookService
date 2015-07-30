@@ -1,14 +1,20 @@
 package com.elrain.whattocook.service;
 
-import com.elrain.whattocook.dal.helper.UsersHelper;
-import com.elrain.whattocook.dao.UserInfoEntity;
-import com.elrain.whattocook.exceptions.IntegerException;
+import com.elrain.whattocook.dal.UsersHelper;
+import com.elrain.whattocook.dao2.entity.UsersEntity;
+import com.elrain.whattocook.persistence.HibernateUtil;
+import com.elrain.whattocook.util.Crypting;
 import com.elrain.whattocook.webutil.body.UserBody;
+import com.elrain.whattocook.webutil.response.UserInfo;
+import org.hibernate.Session;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.sql.SQLException;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.util.List;
+
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 /**
  * Created by elrain on 19.06.15.
@@ -20,32 +26,50 @@ public class UserService {
     @POST
     @Path("/login")
     public Response getUserInfo(UserBody userBody) {
-        UserInfoEntity entity = null;
+        UserInfo entity = null;
+
+        UsersEntity user = UsersHelper.getUserInfo(userBody.getName());
         try {
-            entity = new UsersHelper().getUserInfo(userBody);
+            if (Crypting.checkPassword(userBody.getPassword(), user.getPassword())) {
+                entity = new UserInfo(user.getUserType().getIdUserType(), user.getUserType().getName(), user.getIdUsers());
+            }
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+        } catch (IOException e) {
+            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null == entity ? Response.status(Response.Status.UNAUTHORIZED).build() :
-                Response.ok(entity, MediaType.APPLICATION_JSON).build();
+                Response.ok(entity, APPLICATION_JSON).build();
     }
 
     @PUT
     @Path("/register")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    @Consumes(APPLICATION_JSON)
     public Response addNewUser(UserBody user) {
         try {
-            UsersHelper helper = new UsersHelper();
-            helper.addNewUser(user);
-        } catch (SQLException e) {
+            UsersHelper.addNewUser(user.getName(), Crypting.encrypt(Crypting.decrypt(user.getPassword())));
+        } catch (GeneralSecurityException e) {
             e.printStackTrace();
-            return Response.status(Response.Status.BAD_REQUEST).entity(new IntegerException(e.getErrorCode())).build();
-        } catch (Exception e) {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+        } catch (IOException e) {
             e.printStackTrace();
-            return Response.noContent().build();
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        } catch (IllegalArgumentException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
         return Response.ok().build();
     }
+
+//    @GET
+//    @Path("/all")
+//    public Response getAll() {
+//        List entities = null;
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+//        entities = session.createQuery("FROM Recipe").list();
+//        return Response.ok(entities, APPLICATION_JSON).build();
+//    }
 }

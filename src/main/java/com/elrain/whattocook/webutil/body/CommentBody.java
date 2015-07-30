@@ -5,10 +5,10 @@ package com.elrain.whattocook.webutil.body;
  */
 public class CommentBody {
     private String text;
-    private long userId;
-    private long recipeId;
+    private int userId;
+    private int recipeId;
 
-    public CommentBody(String text, long userId, long recipeId) {
+    public CommentBody(String text, int userId, int recipeId) {
         this.text = text;
         this.userId = userId;
         this.recipeId = recipeId;
@@ -25,19 +25,19 @@ public class CommentBody {
         this.text = text;
     }
 
-    public long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    public long getRecipeId() {
+    public int getRecipeId() {
         return recipeId;
     }
 
-    public void setRecipeId(long recipeId) {
+    public void setRecipeId(int recipeId) {
         this.recipeId = recipeId;
     }
 }

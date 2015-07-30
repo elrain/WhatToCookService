@@ -1,14 +1,12 @@
 package com.elrain.whattocook.service;
 
-import com.elrain.whattocook.dal.helper.CommentsHelper;
-import com.elrain.whattocook.dao.CommentsEntity;
-import com.elrain.whattocook.dao.RecipeEntity;
+import com.elrain.whattocook.dal.CommentsHelper;
+import com.elrain.whattocook.dao2.entity.CommentsEntity;
 import com.elrain.whattocook.webutil.body.CommentBody;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -18,15 +16,11 @@ import java.util.List;
 public class CommentsService {
 
     @GET
-    @Path("{id}")
-    public Response getComments(@PathParam("id") long id) {
+    @Path("{recipeId}")
+    public Response getComments(@PathParam("recipeId") long id) {
         try {
-            CommentsHelper helper = new CommentsHelper();
-            List<CommentsEntity> entities = helper.getComments(id);
+            List<CommentsEntity> entities = CommentsHelper.getCommentsForRecipe(id);
             return Response.ok(entities, MediaType.APPLICATION_JSON).build();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,18 +32,14 @@ public class CommentsService {
     @Path("/new")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addComment(CommentBody comment){
-        try{
-            CommentsHelper helper = new CommentsHelper();
-            helper.addComment(comment);
+    public Response addComment(CommentBody comment) {
+        try {
+            CommentsHelper.insertNew(comment);
             return Response.ok().build();
-        } catch (SQLException e){
+        } catch (Exception e) {
             e.printStackTrace();
             return Response.status(Response.Status.BAD_REQUEST).build();
-        } catch (Exception e){
-            e.printStackTrace();
         }
-        return Response.noContent().build();
     }
 
 }

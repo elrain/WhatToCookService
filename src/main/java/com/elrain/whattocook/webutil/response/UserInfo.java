@@ -1,14 +1,14 @@
-package com.elrain.whattocook.dao;
+package com.elrain.whattocook.webutil.response;
 
 /**
  * Created by elrain on 19.06.15.
  */
-public class UserInfoEntity {
+public class UserInfo {
     private long idUserType;
     private String userTypeName;
     private long idUser;
 
-    public UserInfoEntity(long idUserType, String userTypeName, long idUser) {
+    public UserInfo(long idUserType, String userTypeName, long idUser) {
         this.idUserType = idUserType;
         this.userTypeName = userTypeName;
         this.idUser = idUser;
