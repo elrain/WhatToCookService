@@ -1,4 +1,4 @@
-package com.elrain.whattocook.dao2.entity;
+package com.elrain.whattocook.dao.entity;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -25,19 +25,15 @@ public class RecipeEntity {
     @JoinColumn(name = "idKitchenType")
     private KitchenTypeEntity kitchen;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "iDdishType")
+    @JoinColumn(name = "idDishType")
     private DishTypeEntity dishType;
     private String image;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "AmountInRecipe", schema = "whattocook", joinColumns = {
-            @JoinColumn(name = "idRecipe", nullable = false)}, inverseJoinColumns = {
-            @JoinColumn(name = "idAmount", nullable = false)
+            @JoinColumn(name = "idRecipe")}, inverseJoinColumns = {
+            @JoinColumn(name = "idAmount")
     })
     private Set<AmountEntity> amounts = new HashSet<AmountEntity>();
-
-    @OneToMany(targetEntity = CommentsEntity.class)
-    @JoinColumn(name = "idRecipe")
-    private Set<CommentsEntity> comments = new HashSet<CommentsEntity>();
 
     public Integer getIdRecipe() {
         return idRecipe;
@@ -101,13 +97,5 @@ public class RecipeEntity {
 
     public void setAmounts(Set<AmountEntity> amounts) {
         this.amounts = amounts;
-    }
-
-    public Set<CommentsEntity> getComments() {
-        return comments;
-    }
-
-    public void setComments(Set<CommentsEntity> comments) {
-        this.comments = comments;
     }
 }

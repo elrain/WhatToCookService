@@ -1,4 +1,4 @@
-package com.elrain.whattocook.dao2.entity;
+package com.elrain.whattocook.dao.entity;
 
 import javax.persistence.*;
 
@@ -10,19 +10,19 @@ import javax.persistence.*;
 public class IngridientsEntity implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idIngridients")
-    private Integer idIngridients;
+    @Column(name = "idIngridient")
+    private Integer idIngridient;
     private String name;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idGroups")
+    @JoinColumn(name = "idGroup")
     private GroupsEntity group;
 
-    public Integer getIdIngridients() {
-        return idIngridients;
+    public Integer getIdIngridient() {
+        return idIngridient;
     }
 
-    public void setIdIngridients(Integer idIngridients) {
-        this.idIngridients = idIngridients;
+    public void setIdIngridient(Integer idIngridients) {
+        this.idIngridient = idIngridients;
     }
 
     public String getName() {

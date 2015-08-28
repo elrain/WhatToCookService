@@ -1,8 +1,8 @@
 package com.elrain.whattocook.service;
 
 import com.elrain.whattocook.dal.CommentsHelper;
-import com.elrain.whattocook.dao2.entity.CommentsEntity;
 import com.elrain.whattocook.webutil.body.CommentBody;
+import com.elrain.whattocook.webutil.response.CommentsResponse;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -19,7 +19,7 @@ public class CommentsService {
     @Path("{recipeId}")
     public Response getComments(@PathParam("recipeId") long id) {
         try {
-            List<CommentsEntity> entities = CommentsHelper.getCommentsForRecipe(id);
+            List<CommentsResponse> entities = CommentsHelper.getCommentsForRecipe(id);
             return Response.ok(entities, MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
             e.printStackTrace();

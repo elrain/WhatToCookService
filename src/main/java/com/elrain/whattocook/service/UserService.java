@@ -1,18 +1,15 @@
 package com.elrain.whattocook.service;
 
 import com.elrain.whattocook.dal.UsersHelper;
-import com.elrain.whattocook.dao2.entity.UsersEntity;
-import com.elrain.whattocook.persistence.HibernateUtil;
+import com.elrain.whattocook.dao.entity.UsersEntity;
 import com.elrain.whattocook.util.Crypting;
 import com.elrain.whattocook.webutil.body.UserBody;
 import com.elrain.whattocook.webutil.response.UserInfo;
-import org.hibernate.Session;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-import java.util.List;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
@@ -63,13 +60,4 @@ public class UserService {
         }
         return Response.ok().build();
     }
-
-//    @GET
-//    @Path("/all")
-//    public Response getAll() {
-//        List entities = null;
-//        Session session = HibernateUtil.getSessionFactory().openSession();
-//        entities = session.createQuery("FROM Recipe").list();
-//        return Response.ok(entities, APPLICATION_JSON).build();
-//    }
 }

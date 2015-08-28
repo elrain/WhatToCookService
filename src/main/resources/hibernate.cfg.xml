@@ -7,19 +7,19 @@
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.password">police2</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/whattocook</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/whattocook?useUnicode=true&amp;characterEncoding=utf8</property>
         <property name="hibernate.connection.username">whattocook2</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="show_sql">true</property>
-        <mapping class="com.elrain.whattocook.dao2.entity.GroupsEntity"/>
-        <mapping class="com.elrain.whattocook.dao2.entity.UsersEntity"/>
-        <mapping class="com.elrain.whattocook.dao2.entity.UserTypeEntity"/>
-        <mapping class="com.elrain.whattocook.dao2.entity.IngridientsEntity"/>
-        <mapping class="com.elrain.whattocook.dao2.entity.KitchenTypeEntity"/>
-        <mapping class="com.elrain.whattocook.dao2.entity.DishTypeEntity"/>
-        <mapping class="com.elrain.whattocook.dao2.entity.AmountTypeEntity"/>
-        <mapping class="com.elrain.whattocook.dao2.entity.AmountEntity"/>
-        <mapping class="com.elrain.whattocook.dao2.entity.RecipeEntity"/>
-        <mapping class="com.elrain.whattocook.dao2.entity.CommentsEntity"/>
+        <mapping class="com.elrain.whattocook.dao.entity.GroupsEntity"/>
+        <mapping class="com.elrain.whattocook.dao.entity.UsersEntity"/>
+        <mapping class="com.elrain.whattocook.dao.entity.UserTypeEntity"/>
+        <mapping class="com.elrain.whattocook.dao.entity.IngridientsEntity"/>
+        <mapping class="com.elrain.whattocook.dao.entity.KitchenTypeEntity"/>
+        <mapping class="com.elrain.whattocook.dao.entity.DishTypeEntity"/>
+        <mapping class="com.elrain.whattocook.dao.entity.AmountTypeEntity"/>
+        <mapping class="com.elrain.whattocook.dao.entity.AmountEntity"/>
+        <mapping class="com.elrain.whattocook.dao.entity.RecipeEntity"/>
+        <mapping class="com.elrain.whattocook.dao.entity.CommentsEntity"/>
     </session-factory>
 </hibernate-configuration>

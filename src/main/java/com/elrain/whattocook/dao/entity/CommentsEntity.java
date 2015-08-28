@@ -1,4 +1,4 @@
-package com.elrain.whattocook.dao2.entity;
+package com.elrain.whattocook.dao.entity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,7 +18,9 @@ public class CommentsEntity implements java.io.Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date time;
     private int idRecipe;
-    private int idUser;
+    @OneToOne
+    @JoinColumn(name = "idUser")
+    private UsersEntity user;
 
     public Integer getIdComments() {
         return idComments;
@@ -44,19 +46,19 @@ public class CommentsEntity implements java.io.Serializable {
         this.time = time;
     }
 
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
-
     public int getIdRecipe() {
         return idRecipe;
     }
 
     public void setIdRecipe(int idRecipe) {
         this.idRecipe = idRecipe;
+    }
+
+    public UsersEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UsersEntity user) {
+        this.user = user;
     }
 }

@@ -1,9 +1,7 @@
-package com.elrain.whattocook.dao2.entity;
+package com.elrain.whattocook.dao.entity;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,7 +17,7 @@ public class GroupsEntity implements java.io.Serializable{
     private String name;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "AvailAmountType", schema = "whattocook", joinColumns = {
-            @JoinColumn(name = "idGroups")},
+            @JoinColumn(name = "idGroup")},
             inverseJoinColumns = {
             @JoinColumn(name = "idAmountType")
     })

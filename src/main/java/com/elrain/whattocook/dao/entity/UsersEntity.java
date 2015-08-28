@@ -1,4 +1,4 @@
-package com.elrain.whattocook.dao2.entity;
+package com.elrain.whattocook.dao.entity;
 
 import javax.persistence.*;
 
@@ -10,15 +10,10 @@ import javax.persistence.*;
                 name = "getUserInfo",
                 query = "CALL getUserInfo(:name)",
                 resultClass = UsersEntity.class
-        ),
-        @NamedNativeQuery(
-                name = "addNewUser",
-                query = "CALL addNewUser(:name, :password)",
-                resultClass = UsersEntity.class
         )
 })
 @Entity(name = "Users")
-@Table(name = "UsersEntity", schema = "whattocook")
+@Table(name = "Users", schema = "whattocook")
 public class UsersEntity implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

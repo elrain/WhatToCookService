@@ -1,4 +1,4 @@
-package com.elrain.whattocook.dao2.entity;
+package com.elrain.whattocook.dao.entity;
 
 import javax.persistence.*;
 
@@ -10,16 +10,16 @@ import javax.persistence.*;
 public class DishTypeEntity implements java.io.Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "iDdishType")
-    private Integer iDdishType;
+    @Column(name = "idDishType")
+    private Integer idDishType;
     private String name;
 
-    public Integer getiDdishType() {
-        return iDdishType;
+    public Integer getIdDishType() {
+        return idDishType;
     }
 
-    public void setiDdishType(Integer iDdishType) {
-        this.iDdishType = iDdishType;
+    public void setIdDishType(Integer idDishType) {
+        this.idDishType = idDishType;
     }
 
     public String getName() {

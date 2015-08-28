@@ -1,7 +1,7 @@
 package com.elrain.whattocook.service;
 
 import com.elrain.whattocook.dal.InitHelper;
-import com.elrain.whattocook.dao2.entity.RecipeEntity;
+import com.elrain.whattocook.dao.entity.RecipeEntity;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -25,6 +25,6 @@ public class InitService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return  null;
     }
 }

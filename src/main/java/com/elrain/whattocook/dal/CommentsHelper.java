@@ -1,12 +1,15 @@
 package com.elrain.whattocook.dal;
 
-import com.elrain.whattocook.dao2.entity.CommentsEntity;
-import com.elrain.whattocook.dao2.entity.RecipeEntity;
+import com.elrain.whattocook.dao.entity.CommentsEntity;
+import com.elrain.whattocook.dao.entity.UsersEntity;
 import com.elrain.whattocook.persistence.HibernateUtil;
 import com.elrain.whattocook.webutil.body.CommentBody;
+import com.elrain.whattocook.webutil.response.CommentsResponse;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,11 +18,19 @@ import java.util.List;
  */
 public class CommentsHelper {
 
-    private static final String TABLE = "Comments";
-
-    public static List<CommentsEntity> getCommentsForRecipe(long recipeId) {
+    public static List<CommentsResponse> getCommentsForRecipe(long recipeId) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        return session.createQuery("FROM " + TABLE + " WHERE recipe = " + String.valueOf(recipeId)).list();
+        List<Object[]> list = session.createQuery("SELECT c.text, c.time, c.idComments, c.user.name FROM Comments c WHERE c.idRecipe = " + String.valueOf(recipeId)).list();
+        List<CommentsResponse> result = new ArrayList<CommentsResponse>();
+        for(Object[] o : list){
+            CommentsResponse cr = new CommentsResponse();
+            cr.setCommentId((Integer) o[2]);
+            cr.setText((String) o[0]);
+            cr.setTime((Date) o[1]);
+            cr.setUserName((String) o[3]);
+            result.add(cr);
+        }
+        return result;
     }
 
     public static void insertNew(CommentBody comment) {
@@ -28,8 +39,10 @@ public class CommentsHelper {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
+            UsersEntity user = (UsersEntity) session.createQuery("FROM Users u WHERE u.idUsers = "
+                    + String.valueOf(comment.getUserId())).uniqueResult();
             CommentsEntity entity = new CommentsEntity();
-            entity.setIdUser(comment.getUserId());
+            entity.setUser(user);
             entity.setIdRecipe(comment.getRecipeId());
             entity.setText(comment.getText());
             entity.setTime(new Date());
